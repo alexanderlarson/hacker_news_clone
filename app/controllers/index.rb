@@ -10,6 +10,7 @@ get '/login' do
 end
 
 get '/profile/:user_id' do
+  @user = User.find(params[:user_id])
   erb :profile
 end
 
@@ -23,6 +24,12 @@ end
 
 get '/make_new_post/' do 
   erb :new_post
+end
+
+get 'post/:post_id' do
+  @post = Post.find(params[:post_id])
+  @comments = @post.comments
+  erb :singlepost
 end
 
 get '/logout' do
@@ -42,10 +49,16 @@ post '/signup' do
   redirect to '/profile/:user_id'
 end
 
-post '/newpost/:user_id' do
+post '/newpost/:post_id' do
   @user_id = User.find(params[:id])
   @post = Post.create(params[:post])
 end
 
-
+post '/post/:post_id' do
+  @post_id = params[:post_id]
+  @user_id = User.find(session[:id]).id 
+  @comment_text = params[:comment_text]
+  Comment.create(post_id: @post_id, user_id: @user_id, comment_text: @comment_text)
+  redirect "/post/#{@post_id}"
+end
 

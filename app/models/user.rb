@@ -1,6 +1,8 @@
-require 'bcrypt'
+
 
 class User < ActiveRecord::Base
+
+  include BCrypt
   # Remember to create a migration!
   has_many :authored_posts, class_name: "Post", foreign_key: :author_id
   has_many :comments

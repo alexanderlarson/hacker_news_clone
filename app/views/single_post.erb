@@ -1,0 +1,13 @@
+<h1><%= @post.title %></h1>
+
+
+  <form action='/newpost/<%= @post.id %>' method='POST'>
+    <a>Make a Comment <textarea rows="4" cols="50" name="post[comment_text]"></textarea></a><br>
+    <input type="submit" value="Submit!" name="submit">
+  </form>
+
+  <% @comments.each do |comment| %>
+  <ul>
+    <li><%= comment.comment_text %>,  by <a href="profile/<%= comment.user_id %>"><%= comment.user.name %></a></li>
+  </ul>
+  <%end%>

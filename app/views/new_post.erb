@@ -1,6 +1,7 @@
 <h1>New Post</h1>
-<form action='/newpost/<%= @user_id %>' method='POST'>
-  <a>Title<input type="text" name="post[title]"></a><br>
-  <a>URL<input type="text" name="post[url]"><a/><br>
+<form action="/newpost/<%= @user_id %>" method='POST'>
+  <a>Title<input type="text" name="title"></a><br>
+  <a>URL<input type="text" name="url"><a/><br>
   <input type="submit" value="Submit!" name="submit">
 </form>
+ 

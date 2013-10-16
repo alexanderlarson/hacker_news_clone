@@ -15,6 +15,8 @@ get '/profile/:user_id' do
 end
 
 get '/all_posts/:user_id' do
+  @user = User.find(params[:user_id])
+  @user_posts = @user.posts
   erb :member_posts
 end
 
@@ -22,14 +24,19 @@ get '/all_comments/:user_id' do
   erb :member_comments
 end
 
-get '/make_new_post/' do 
-  erb :new_post
+get '/make_new_post' do 
+  if current_user
+    @user_id = User.find(session[:id]).id
+   erb :new_post
+  else
+    redirect '/login'
+  end
 end
 
-get 'post/:post_id' do
+get '/post/:post_id' do
   @post = Post.find(params[:post_id])
   @comments = @post.comments
-  erb :singlepost
+  erb :single_post
 end
 
 get '/logout' do
@@ -40,18 +47,25 @@ end
 #========== POST =============
 
 post '/login' do
-  @user = User.find(params[:email])
-  redirect to '/'
-end
+  @user = User.find_by_email(params[:email])
+    if @user.password_hash == params[:password]
+      session[:id] = @user.id
+      redirect "/profile/#{session[:id]}"
+    else
+      redirect '/login'
+    end
+  end
 
 post '/signup' do
-  @user = User.create(params[:user])
-  redirect to '/profile/:user_id'
+  @user = User.create(params[:newuser])
+  session[:id] = @user.id
+  redirect to "/profile/#{session[:id]}"
 end
 
 post '/newpost/:post_id' do
-  @user_id = User.find(params[:id])
+  @user_id = User.find(params[:user_id])
   @post = Post.create(params[:post])
+  redirect "/post/#{@post.id}"
 end
 
 post '/post/:post_id' do

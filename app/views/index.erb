@@ -4,6 +4,7 @@
   <% @posts.each do |post| %>
   <ul>
     <li><a href="<%= post.url%>"><%= post.title %>, posted by: <%= post.author_id %>, on <%= post.created_at %><a></li>
+        <a href="/post/<%=post.id%>"><%= post.comments.count %>, comments </a>
   </ul>
   <% end %>
  

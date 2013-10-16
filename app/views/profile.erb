@@ -1,2 +1,21 @@
 <h1>Profile for <%=@user.name %></h1>
 
+<table>  
+   <tr>
+      <td>User: <%= @user.name %></td>
+   </tr>  
+   <tr>
+      <td>Created: <%= @user.created_at.strftime("%a, %b %Y")  %></td>
+   </tr>  
+   <tr>
+      <td>
+        About: 
+      </td>
+      <td>
+        <a href="/all_posts/<%= @user.id %>"> Submissions</a>
+      </td>
+      <td>
+        <a href="/all_comments/<%= @user.id %>">Comments</a>
+      </td>
+   </tr>  
+</table>

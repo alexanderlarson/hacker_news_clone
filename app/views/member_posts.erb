@@ -1,0 +1,15 @@
+<h1>All Submissions for <%= @user.name %></h1>
+
+<table>  
+  <% @user_posts.each do |post| %>
+   <tr>
+      <td> 
+         El posto!: <a href= '<%= post.url %>'><%= post.title %></a>
+      </td>
+      <td>
+        ~on <%= post.created_at.strftime("%a, %b %Y") %><br>
+      </td>
+
+   </tr>  
+  <% end %>  
+</table>

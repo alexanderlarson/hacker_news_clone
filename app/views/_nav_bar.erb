@@ -1,11 +1,10 @@
 <div class="navbar">
  <ul>
   <li><a href='/'>Slacker News</a></li> 
-  <li><a href='/newpost'>Submit</a></li> 
   <li>
     <% if current_user %>
       <a href='/logout'>Logout</a>
-      <a href='/newpost'>Submit New Post</a>
+      <a href='/make_new_post'>Submit New Post</a>
     <% else %>
       <a href='/login'>Login</a>
     <% end %>
